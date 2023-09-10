@@ -95,6 +95,8 @@ export AWS_VAULT_PROMPT=ykman
 # console1987
 export CONSOLE_USER=emilio
 
+export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
+
 # aliases
 [[ -f ~/.aliases ]] && source ~/.aliases
 

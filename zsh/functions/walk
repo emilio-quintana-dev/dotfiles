@@ -1,0 +1,3 @@
+function lk {
+  cd "$(walk "$@")"
+}

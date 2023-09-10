@@ -92,14 +92,21 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-  -- === colorscheme(s) ===
   {
-    "catppuccin/nvim",
-    name = "catppuccin",
+    'AlexvZyl/nordic.nvim',
     lazy = false,
     priority = 1000,
     config = function()
-      vim.cmd('colorscheme catppuccin')
+      require 'nordic'.load({
+        cursorline = {
+          theme = 'dark',
+          bold = false,
+          bold_number = true,
+          blend = 0.7,
+        },
+      })
+
+      vim.cmd('colorscheme nordic')
     end
   },
   -- === completion ===
@@ -217,7 +224,6 @@ require("lazy").setup({
               'javascriptreact',
               'python',
               'ruby',
-              'sh',
               'typescript',
               'typescriptreact',
             },
@@ -368,7 +374,7 @@ require("lazy").setup({
               filetypes = {
                 javascript = 'eslint',
                 javascriptreact = 'eslint',
-                python = { 'pylint', 'flake8' },
+                python = { 'pylint' },
                 ruby = 'rubocop',
                 sh = 'shellcheck',
                 typescript = 'eslint',
@@ -424,6 +430,13 @@ require("lazy").setup({
           delete_check_events = "TextChanged",
         },
       },
+      {
+        "https://github.com/zbirenbaum/copilot-cmp",
+        dependencies = "https://github.com/zbirenbaum/copilot.lua",
+        config = function()
+          require("copilot_cmp").setup()
+        end,
+      },
     },
     opts = function()
       local cmp = require("cmp")
@@ -475,6 +488,7 @@ require("lazy").setup({
           end),
         }),
         sources = cmp.config.sources({
+          { name = 'copilot',                 group_index = 2 },
           { name = "nvim_lsp",                group_index = 2 },
           { name = "nvim_lsp_signature_help", group_index = 2 },
           { name = "luasnip",                 group_index = 2 },
@@ -494,15 +508,12 @@ require("lazy").setup({
   { "https://github.com/nvim-lua/popup.nvim" },
   -- === experiments ===
   {
-    "zbirenbaum/copilot.lua",
+    "https://github.com/zbirenbaum/copilot.lua",
     cmd = "Copilot",
     build = ":Copilot auth",
     opts = {
-      suggestion = { enabled = true, auto_trigger = true },
+      suggestion = { enabled = false },
       panel = { enabled = false },
-      keymap = {
-        accept = "<C-j>",
-      },
     },
   },
   {
@@ -636,8 +647,11 @@ require("lazy").setup({
       require("guess-indent").setup()
     end,
   },
-
   -- === find ===
+  {
+    "https://github.com/brooth/far.vim",
+    lazy = false,
+  },
   { "https://github.com/junegunn/fzf",                build = "./install --bin" },
   { "https://github.com/nvim-tree/nvim-web-devicons", lazy = true },
   { "https://github.com/MunifTanjim/nui.nvim",        lazy = true },
@@ -1059,7 +1073,7 @@ require("lazy").setup({
     config = function()
       require('lualine').setup {
         options = {
-          theme = 'catppuccin',
+          theme = 'nordic',
         }
       }
     end

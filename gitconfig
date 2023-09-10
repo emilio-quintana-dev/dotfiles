@@ -73,8 +73,6 @@
   protocol = ssh
 [init]
   defaultBranch = main
-[merge]
-  ff = only
 [pretty]
   colored = format:%Cred%h%Creset %s %Cgreen(%cr) %C(bold blue)%an%Creset
   coloredwithrefs = format:%Cred%h%Creset %Cblue%d%Creset %s %Cgreen(%cr)%C(bold blue)%an%Creset
@@ -89,5 +87,5 @@
 [split-diffs]
   theme-name = arctic
 [user]
-  name = Devin Morgenstern
-  email = devin.morgenstern@protonmail.com
+  name = Emilio Quintana
+  email = emilioquintana90@gmail.com

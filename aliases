@@ -1,5 +1,5 @@
 # Unix
-alias cat="ccat"
+alias cat="cat"
 alias cp="cp -iv"
 alias df="df -h"
 alias du="du -cksh"
@@ -68,6 +68,8 @@ alias yb="yarn build-local"
 alias yw="yarn watch"
 alias yu="curl --compressed -o- -L https://yarnpkg.com/install.sh | bash"
 
+alias rp="cd $HOME/code/work/commonlit/packages/component-library && yarn build"
+
 # Use modern regexps for sed, i.e. "(one|two)", not "\(one\|two\)"
 alias sed="sed -E"
 
@@ -130,8 +132,9 @@ alias sshpeer="art -on stage ssh"
 
 # Frequent directories
 alias dot="cd $HOME/dotfiles"
-alias work="cd $HOME/commonlit/"
+alias work="cd $HOME/code/work/commonlit/"
 alias code="cd $HOME/code"
+alias school="cd $HOME/code/school"
 
 # random
 alias tl="tmux list-sessions"
