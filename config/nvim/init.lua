@@ -64,7 +64,7 @@ vim.opt.shortmess = "fxtToOFc" -- vim default with 'c' appended (don't give |ins
 vim.wo.cursorline = false
 vim.wo.number = true           -- Turn on line numbers
 vim.wo.numberwidth = 1         -- Minimal number of columns to use for the line number.
-vim.wo.signcolumn = "yes"      -- Leave signcolumn enabled otherwise it's a little jarring
+vim.wo.signcolumn = "no"       -- Leave signcolumn enabled otherwise it's a little jarring
 vim.wo.wrap = false            -- Don't wrap lines longer than the width of the window
 vim.diagnostic.config({
   virtual_text = false,
@@ -93,20 +93,39 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
   {
-    'AlexvZyl/nordic.nvim',
+    "rebelot/kanagawa.nvim",
+    name = "kanagawa",
     lazy = false,
     priority = 1000,
     config = function()
-      require 'nordic'.load({
-        cursorline = {
-          theme = 'dark',
-          bold = false,
-          bold_number = true,
-          blend = 0.7,
+      require('kanagawa').setup({
+        compile = false,  -- enable compiling the colorscheme
+        undercurl = true, -- enable undercurls
+        commentStyle = { italic = true },
+        functionStyle = {},
+        keywordStyle = { italic = true },
+        statementStyle = { bold = true },
+        typeStyle = {},
+        transparent = false,   -- do not set background color
+        dimInactive = false,   -- dim inactive window `:h hl-NormalNC`
+        terminalColors = true, -- define vim.g.terminal_color_{0,17}
+        colors = {
+          -- add/modify theme and palette colors
+          palette = {},
+          theme = { wave = {}, lotus = {}, dragon = {}, all = {} },
+        },
+        overrides = function(colors) -- add/modify highlights
+          return {}
+        end,
+        theme = "wave", -- Load "wave" theme when 'background' option is not set
+        background = {
+          -- map the value of 'background' option to a theme
+          dark = "wave", -- try "dragon" !
+          light = "lotus"
         },
       })
 
-      vim.cmd('colorscheme nordic')
+      vim.cmd("colorscheme kanagawa")
     end
   },
   -- === completion ===
@@ -1073,7 +1092,7 @@ require("lazy").setup({
     config = function()
       require('lualine').setup {
         options = {
-          theme = 'nordic',
+          theme = 'auto',
         }
       }
     end
@@ -1179,7 +1198,6 @@ function! NeoSplit(cmd) abort
 endfunction
 let g:test#custom_strategies = {'neosplit': function('NeoSplit')}
 let g:test#strategy = 'neosplit'
-" let test#ruby#rspec#executable = 'docker-compose exec app bundle exec rspec'
 ]])
 
 -- === debugging ===
@@ -1260,7 +1278,7 @@ vim.g.fzf_layout = {
 
 -- === format on save ===
 vim.api.nvim_command [[autocmd BufWritePre * lua vim.lsp.buf.format()]]
--- vim.api.nvim_command [[autocmd BufWritePre *.rb lua vim.lsp.buf.format({ async = true })]]
+vim.api.nvim_command [[autocmd BufWritePre *.rb lua vim.lsp.buf.format({ async = true })]]
 
 -- === zoom a vim pane ===
 vim.keymap.set("n", "<Leader>-", ":wincmd _<CR>:wincmd |<CR>", { noremap = true })

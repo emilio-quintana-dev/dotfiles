@@ -1,5 +1,0 @@
---api
---database=postgresql
---skip-asset-pipeline
---skip-test
---javascript=esbuild
