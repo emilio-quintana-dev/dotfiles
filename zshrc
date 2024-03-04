@@ -72,14 +72,14 @@ source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 # Hub
 eval "$(hub alias -s)"
 
+# Yarn
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+# export PATH=node_modules/.bin:$PATH
+
 # asdf
 . $HOME/.asdf/asdf.sh
 fpath=(${ASDF_DIR}/completions $fpath)
 export NODEJS_CHECK_SIGNATURES=no
-
-# Yarn
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
-# export PATH=node_modules/.bin:$PATH
 
 # docker
 export COMPOSE_HTTP_TIMEOUT=300
@@ -106,3 +106,10 @@ export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
 # Datadog
 # Relevant issue: https://github.com/DataDog/dd-trace-rb/issues/3084
 export DD_TRACE_STARTUP_LOGS=false
+
+# Needed for OpenAI vim plugin
+export OPENAI_API_KEY=$OPENAI_KEY
+
+# Postgres 16
+# https://github.com/Homebrew/homebrew-core/issues/ 121043#issuecomment-1397888835
+export PATH=$PATH:$HOMEBREW_PREFIX/opt/postgresql@16/bin
