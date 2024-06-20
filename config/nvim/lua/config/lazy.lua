@@ -17,7 +17,7 @@ require("lazy").setup({
 			"LazyVim/LazyVim",
 			import = "lazyvim.plugins",
 			opts = {
-				colorscheme = "sonokai",
+				colorscheme = "night-owl",
 				news = {
 					lazyvim = true,
 					neovim = true,
@@ -40,7 +40,7 @@ require("lazy").setup({
 	dev = {
 		path = "~/.ghq/github.com",
 	},
-	checker = { enabled = true },
+	checker = { enabled = false },
 	performance = {
 		cache = {
 			enabled = true,

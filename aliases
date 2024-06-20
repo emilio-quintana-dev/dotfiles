@@ -132,7 +132,9 @@ alias sshpeer="art -on stage ssh"
 
 # Frequent directories
 alias dot="cd $HOME/dotfiles"
-alias work="cd $HOME/code/work/commonlit/"
+alias commonlit="cd $HOME/code/work/commonlit/"
+alias wishtree="cd $HOME/code/wishtree/"
+alias dig="cd $HOME/code/digi/"
 alias code="cd $HOME/code"
 alias school="cd $HOME/code/school"
 
@@ -142,3 +144,4 @@ alias wifi-ip="ipconfig getifaddr en0"
 alias update="$HOME/dotfiles/bin/update_packages.sh"
 alias install_rust="curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh"
 alias intel="arch -x86_64 /bin/zsh"
+alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"

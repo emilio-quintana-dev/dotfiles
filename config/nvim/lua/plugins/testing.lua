@@ -67,8 +67,6 @@ return {
 
                 let g:test#custom_strategies = {'neosplit': function('NeoSplit')}
                 let g:test#strategy = 'neosplit'
-                " Uncomment the following line if needed
-                " let test#ruby#rspec#executable = 'docker-compose exec app bundle exec rspec'
             ]])
 		end,
 	},

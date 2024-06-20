@@ -73,8 +73,7 @@ source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 eval "$(hub alias -s)"
 
 # Yarn
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
-# export PATH=node_modules/.bin:$PATH
+# export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
 # asdf
 . $HOME/.asdf/asdf.sh
@@ -109,6 +108,10 @@ export DD_TRACE_STARTUP_LOGS=false
 
 # Needed for OpenAI vim plugin
 export OPENAI_API_KEY=$OPENAI_KEY
+
+# Look into local node_modules folders first to avoid
+# formatting issues
+export PATH=node_modules/.bin:$PATH
 
 # Postgres 16
 # https://github.com/Homebrew/homebrew-core/issues/ 121043#issuecomment-1397888835

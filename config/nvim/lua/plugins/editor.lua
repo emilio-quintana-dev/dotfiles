@@ -1,4 +1,10 @@
 return {
+	-- Useful for opening up new panes
+	-- when working on Ruby files.
+	{
+		"https://github.com/tpope/vim-rails",
+		ft = { "ruby" },
+	},
 	-- Hihglight colors
 	{
 		"echasnovski/mini.hipatterns",
