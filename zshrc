@@ -26,7 +26,7 @@ export FZF_DEFAULT_OPTS='
 # syntax highlighting
 # Technically, this is not needed in Warp, but it's included for persistence
 # across blocks.
-source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # completion (not needed in Warp)
 # source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
