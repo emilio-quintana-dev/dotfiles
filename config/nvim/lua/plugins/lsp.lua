@@ -1,7 +1,5 @@
 return {
 	-- tools
-	-- [NOTE]: It's possible that I need to add the following to the `ensure_installed` list:
-	--"astro", "bashls", "codeqlls", "cssls", "cssmodules_ls", "dockerls", "docker_compose_language_service", "eslint", "graphql", "html", "jsonls", "marksman", "prismals", "pyright", "solargraph", "rust_analyzer", "sqlls", "stylelint_lsp", "lua_ls", "tailwindcss", "terraformls", "tflint", "tsserver", "yamlls", "elixirls"
 	{
 		"williamboman/mason.nvim",
 		opts = function(_, opts)
@@ -12,8 +10,9 @@ return {
 				"tailwindcss-language-server",
 				"typescript-language-server",
 				"css-lsp",
-				"solargraph",
 				"rubocop",
+				"solargraph",
+				"eslint-lsp",
 			})
 		end,
 	},
@@ -25,6 +24,7 @@ return {
 			inlay_hints = { enabled = true },
 			---@type lspconfig.options
 			servers = {
+				eslint = {},
 				cssls = {},
 				tailwindcss = {
 					root_dir = function(...)

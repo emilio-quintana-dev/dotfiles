@@ -1,51 +1,11 @@
-set -o emacs
+# Enable emacs mode for command line editing
+# set -o emacs
 
-# load custom executable functions
-for function in ~/.zsh/functions/*; do
-  source $function
-done
-
-# extra files in ~/.zsh/configs/pre , ~/.zsh/configs , and ~/.zsh/configs/post
-# these are loaded first, second, and third, respectively.
-_load_settings() {
-  _dir="$1"
-  if [ -d "$_dir" ]; then
-    if [ -d "$_dir/pre" ]; then
-      for config in "$_dir"/pre/**/*(N-.); do
-        . $config
-      done
-    fi
-
-    for config in "$_dir"/**/*(N-.); do
-      case "$config" in
-        "$_dir"/pre/*)
-          :
-          ;;
-        "$_dir"/post/*)
-          :
-          ;;
-        *)
-          if [ -f $config ]; then
-            . $config
-          fi
-          ;;
-      esac
-    done
-
-    if [ -d "$_dir/post" ]; then
-      for config in "$_dir"/post/**/*(N-.); do
-        . $config
-      done
-    fi
-  fi
-}
-_load_settings "$HOME/.zsh/configs"
-
-# add bin and local/bin to path
+# Add bin and local/bin to path
 [ -d "/usr/local/bin" ] && PATH="/usr/local/bin:${PATH}"
 [ -d "${HOME}/bin" ] && PATH="${HOME}/bin:${PATH}"
 
-# fzf
+# fzf configuration
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_COMMAND='rg --files --hidden --glob \!.git'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
@@ -64,29 +24,28 @@ export FZF_DEFAULT_OPTS='
 '
 
 # syntax highlighting
+# Technically, this is not needed in Warp, but it's included for persistence
+# across blocks.
 source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-# completion
-source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+# completion (not needed in Warp)
+# source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
-# Hub
-eval "$(hub alias -s)"
-
-# Yarn
+# Yarn (commented out if not needed)
 # export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
-# asdf
+# asdf version manager
 . $HOME/.asdf/asdf.sh
 fpath=(${ASDF_DIR}/completions $fpath)
 export NODEJS_CHECK_SIGNATURES=no
 
-# docker
+# Docker
 export COMPOSE_HTTP_TIMEOUT=300
 
-# keychain
+# keychain (conditional for Linux)
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
   /usr/bin/keychain --nogui $HOME/.ssh/id_rsa
-  source $HOME/.keychain/MSI-sh
+  source $HOME/.keychain/$HOSTNAME-sh
 fi
 
 # aws-vault
@@ -95,24 +54,26 @@ export AWS_VAULT_PROMPT=ykman
 # console1987
 export CONSOLE_USER=emilio
 
+# Disable fork safety
 export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
 
-# aliases
+# Load aliases if file exists
 [[ -f ~/.aliases ]] && source ~/.aliases
 
+# Load local .zshrc configurations if file exists
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
 
 # Datadog
-# Relevant issue: https://github.com/DataDog/dd-trace-rb/issues/3084
 export DD_TRACE_STARTUP_LOGS=false
 
-# Needed for OpenAI vim plugin
+# OpenAI vim plugin key
 export OPENAI_API_KEY=$OPENAI_KEY
 
-# Look into local node_modules folders first to avoid
-# formatting issues
+# Prioritize local node_modules bin for npm scripts
 export PATH=node_modules/.bin:$PATH
 
-# Postgres 16
-# https://github.com/Homebrew/homebrew-core/issues/ 121043#issuecomment-1397888835
+# Postgres 16 path addition
 export PATH=$PATH:$HOMEBREW_PREFIX/opt/postgresql@16/bin
+
+# Initialize Starship prompt
+eval "$(starship init zsh)"
