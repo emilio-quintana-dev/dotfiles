@@ -1,15 +1,15 @@
 return {
 	{
 		"nvim-treesitter/nvim-treesitter",
-		tag = "v0.9.1",
+		tag = "v0.9.2",
 		opts = {
+			auto_install = true,
 			ensure_installed = {
 				"javascript",
 				"ruby",
 				"typescript",
 				"css",
 				"gitignore",
-				"graphql",
 				"http",
 				"json",
 				"scss",
