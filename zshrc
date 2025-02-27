@@ -1,6 +1,3 @@
-# Enable emacs mode for command line editing
-# set -o emacs
-
 # Add bin and local/bin to path
 [ -d "/usr/local/bin" ] && PATH="/usr/local/bin:${PATH}"
 [ -d "${HOME}/bin" ] && PATH="${HOME}/bin:${PATH}"
@@ -26,13 +23,7 @@ export FZF_DEFAULT_OPTS='
 # syntax highlighting
 # Technically, this is not needed in Warp, but it's included for persistence
 # across blocks.
-# source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-# completion (not needed in Warp)
-# source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-
-# Yarn (commented out if not needed)
-# export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # asdf version manager
 . $HOME/.asdf/asdf.sh
@@ -65,9 +56,6 @@ export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
 
 # Datadog
 export DD_TRACE_STARTUP_LOGS=false
-
-# OpenAI vim plugin key
-export OPENAI_API_KEY=$OPENAI_KEY
 
 # Prioritize local node_modules bin for npm scripts
 export PATH=node_modules/.bin:$PATH

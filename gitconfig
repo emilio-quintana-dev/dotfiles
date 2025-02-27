@@ -80,6 +80,7 @@
   rebase = true
 [push]
   default = simple
+	autoSetupRemote = true
 [rebase]
   autosquash = true
 [rerere]
