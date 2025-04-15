@@ -65,3 +65,6 @@ export PATH=$PATH:$HOMEBREW_PREFIX/opt/postgresql@16/bin
 
 # Initialize Starship prompt
 eval "$(starship init zsh)"
+
+# Set BUNDLER_EDITOR for bundle open command
+export BUNDLER_EDITOR="nvim"

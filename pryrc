@@ -32,11 +32,3 @@ env_colors = {
 def app_name
   File.basename(Rails.root)
 end
-
-if defined?(Rails)
-  Pry.config.prompt = proc do |obj, nest_level, _|
-    color = env_colors.fetch(Rails.env, color_escape_codes[:reset])
-    colored_environment_name = "#{color}#{Rails.env}#{color_escape_codes[:reset]}"
-    "[#{app_name}]""(#{colored_environment_name}) #{obj}:#{nest_level}>"
-  end
-end

@@ -131,13 +131,11 @@ alias sshpeer="art -on stage ssh"
 # Frequent directories
 alias dot="cd $HOME/dotfiles"
 alias commonlit="cd $HOME/code/commonlit/commonlit/"
-alias wishtree="cd $HOME/code/wishtree/"
 alias quantum="cd $HOME/code/quantum"
 alias admin-panel="cd $HOME/code/quantum/admin-panel"
 alias click-mapper="cd $HOME/code/quantum/click-mapper"
-# alias dig="cd $HOME/code/digi/"
 alias code="cd $HOME/code"
-alias school="cd $HOME/code/school"
+alias dd="cd $HOME/code/quantum/dreamdolls"
 
 # random
 alias tl="tmux list-sessions"

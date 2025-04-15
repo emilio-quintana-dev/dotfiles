@@ -2,17 +2,11 @@ return {
 	-- Useful for opening up new panes
 	-- when working on Ruby files.
 	{
-		"https://github.com/tpope/vim-rails",
-		ft = { "ruby" },
-	},
-	-- Hihglight colors
-	{
-		"echasnovski/mini.hipatterns",
-		event = "BufReadPre",
-		opts = {},
+		"tpope/vim-rails", -- Use the standard GitHub format
+		ft = { "ruby" }, -- Lazy-load on Ruby files
 	},
 	{
-		"telescope.nvim",
+		"nvim-telescope/telescope.nvim", -- Use full path
 		priority = 1000,
 		dependencies = {
 			{
@@ -20,6 +14,7 @@ return {
 				build = "make",
 			},
 			"nvim-telescope/telescope-file-browser.nvim",
+			"nvim-lua/plenary.nvim", -- Explicitly include plenary as dependency
 		},
 		keys = {
 			{
@@ -96,12 +91,13 @@ return {
 				desc = "Open File Browser with the path of the current buffer",
 			},
 		},
-		config = function(_, opts)
+		opts = function(_, opts)
+			-- Use opts function for LazyVim compatibility
 			local telescope = require("telescope")
 			local actions = require("telescope.actions")
-			local fb_actions = require("telescope").extensions.file_browser.actions
+			local fb_actions = telescope.extensions.file_browser.actions
 
-			opts.defaults = vim.tbl_deep_extend("force", opts.defaults, {
+			opts.defaults = vim.tbl_deep_extend("force", opts.defaults or {}, {
 				wrap_results = true,
 				layout_strategy = "horizontal",
 				layout_config = { prompt_position = "top" },
@@ -111,7 +107,8 @@ return {
 					n = {},
 				},
 			})
-			opts.pickers = {
+
+			opts.pickers = vim.tbl_deep_extend("force", opts.pickers or {}, {
 				diagnostics = {
 					theme = "ivy",
 					initial_mode = "normal",
@@ -119,16 +116,14 @@ return {
 						preview_cutoff = 9999,
 					},
 				},
-			}
-			opts.extensions = {
+			})
+
+			opts.extensions = vim.tbl_deep_extend("force", opts.extensions or {}, {
 				file_browser = {
 					theme = "dropdown",
-					-- disables netrw and use telescope-file-browser in its place
 					hijack_netrw = true,
 					mappings = {
-						-- your custom insert mode mappings
 						["n"] = {
-							-- your custom normal mode mappings
 							["N"] = fb_actions.create,
 							["h"] = fb_actions.goto_parent_dir,
 							["<C-u>"] = function(prompt_bufnr)
@@ -144,8 +139,13 @@ return {
 						},
 					},
 				},
-			}
-			telescope.setup(opts)
+			})
+
+			return opts
+		end,
+		config = function(_, opts)
+			require("telescope").setup(opts)
+			-- Load extensions after setup
 			require("telescope").load_extension("fzf")
 			require("telescope").load_extension("file_browser")
 		end,
