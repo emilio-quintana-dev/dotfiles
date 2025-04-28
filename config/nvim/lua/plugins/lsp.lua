@@ -18,11 +18,9 @@ return {
 					"html",
 					"lua_ls",
 					"eslint",
-					"solargraph",
 					"stylelint_lsp",
-					"rubocop",
 				},
-				automatic_installation = true, -- Automatically install missing servers
+				-- automatic_installation = true, -- Automatically install missing servers
 			})
 
 			local lspconfig = require("lspconfig")
@@ -34,12 +32,42 @@ return {
 				capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
 			end
 
+			-- Directly set up non-Mason servers first
+			lspconfig.rubocop.setup({
+				capabilities = capabilities,
+				cmd = { os.getenv("HOME") .. "/.asdf/shims/rubocop", "--lsp" },
+				root_dir = require("lspconfig.util").root_pattern("Gemfile", ".rubocop.yml", ".git", "."),
+				filetypes = { "ruby" },
+			})
+
+			lspconfig.solargraph.setup({
+				capabilities = capabilities,
+				cmd = { os.getenv("HOME") .. "/.asdf/shims/solargraph", "stdio" },
+				root_dir = require("lspconfig.util").root_pattern("Gemfile", ".git", "."),
+				filetypes = { "ruby" },
+				settings = {
+					solargraph = {
+						autoformat = true,
+						completion = true,
+						diagnostic = true,
+						folding = true,
+						references = true,
+						rename = true,
+						symbols = true,
+					},
+				},
+			})
+
+			-- Set up Mason servers
 			mason_lspconfig.setup_handlers({
 				-- Default handler for all servers
 				function(server_name)
-					lspconfig[server_name].setup({
-						capabilities = capabilities,
-					})
+					-- Skip servers that have custom configs below
+					if server_name ~= "solargraph" and server_name ~= "rubocop" then
+						lspconfig[server_name].setup({
+							capabilities = capabilities,
+						})
+					end
 				end,
 
 				["stylelint_lsp"] = function()
@@ -69,6 +97,9 @@ return {
 						capabilities = capabilities,
 					})
 				end,
+
+				-- Removed individual handlers for solargraph and rubocop
+				-- since they're set up directly before the handlers
 
 				["lua_ls"] = function()
 					lspconfig.lua_ls.setup({
@@ -105,9 +136,9 @@ return {
 		"zbirenbaum/copilot.lua",
 		opts = {
 			suggestion = {
-				enabled = false,
+				enabled = true,
 			},
-			panel = { enabled = false },
+			panel = { enabled = true },
 		},
 	},
 }
