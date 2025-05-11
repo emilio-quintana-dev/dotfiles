@@ -2,9 +2,10 @@ return {
 	-- Mason and LSP Setup
 	{
 		"williamboman/mason.nvim",
+		version = "1.11.0",
 		build = ":MasonUpdate",
 		dependencies = {
-			"williamboman/mason-lspconfig.nvim",
+			{ "williamboman/mason-lspconfig.nvim", version = "1.32.0" },
 		},
 		opts = function(_, opts)
 			require("mason").setup() -- Basic Mason setup
