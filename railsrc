@@ -1,0 +1,7 @@
+--database=postgresql
+--javascript=esbuild
+--asset-pipeline=propshaft
+--css=postcss
+--skip-hotwire
+--skip-test
+--skip-system-test

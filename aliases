@@ -1,0 +1,152 @@
+# Unix
+alias cat="cat"
+alias cp="cp -iv"
+alias df="df -h"
+alias du="du -cksh"
+alias e="$EDITOR"
+alias help="run-help"
+alias ll="ls -al"
+alias ln="ln -v"
+alias ls="ls -FGh"
+alias mkdir="mkdir -p"
+alias mv="mv -iv"
+alias rm="rm -i"
+alias v="nvim"
+alias n="nvim"
+alias calc="genius"
+alias fzf="fzf --preview 'bat --style=numbers --color=always --line-range :500 {}'"
+
+# Bundler
+alias b="bundle"
+
+# Pretty print the path
+alias path='echo $PATH | tr -s ":" "\n"'
+
+# Reload ZSH
+alias z="exec zsh"
+
+# Dev Tools
+alias i="irb"
+alias p="pry"
+alias prettyjson="python -m json.tool"
+alias ru="rubocop"
+alias wuzz="$GOPATH/bin/wuzz"
+
+# Seed
+# alias seed = "pgsync curriculum,promotional,institutions --defer-constraints --preserve pgsync school_district:18883,school_district:20848,school_district:20849 --defer-constraints --preserve"
+
+# Weather and the moon, man
+alias moon="curl wttr.in/Moon"
+alias weather="curl http://v2\.wttr\.in/los_angeles"
+
+# Ruby and Rails
+alias be="bundle exec"
+alias ber="bundle exec rspec"
+alias irb='irb --readline -r irb/completion'
+alias migrate="bundle exec rake db:migrate db:rollback && bundle exec rake db:migrate db:test:prepare"
+alias racer="ruby -r tracer"
+alias rake="RUBYOPT='-W0' rake"
+alias ras="bundle exec rails s"
+alias rc="aws-vault exec me rails console -- --noautocomplete"
+alias ruby="ruby -w"
+alias schema_fixup="rails db:drop db:create db:schema:load && rails db:migrate"
+
+alias taild="tail -f log/development.log"
+alias tailt="tail -f log/test.log"
+alias reds="redis-server"
+
+# Python
+alias pipvenv="python -m pip"
+alias pvenv="python -m venv .venv"
+alias apvenv="source .venv/bin/activate"
+alias runserver="python manage.py runserver"
+alias pmigrate="python manage.py migrate"
+
+# JavaScript
+alias yi="yarn install --ignore-engines"
+alias yb="yarn build-local"
+alias yw="yarn watch"
+alias yu="curl --compressed -o- -L https://yarnpkg.com/install.sh | bash"
+
+alias rp="cd $HOME/code/work/commonlit/packages/component-library && yarn build"
+
+# Use modern regexps for sed, i.e. "(one|two)", not "\(one\|two\)"
+alias sed="sed -E"
+
+# Copy-pasting
+alias \❯=''
+
+# Git
+alias ap="git add --all"
+alias add="git add"
+alias aa="git add --patch"
+alias branch="git branch -vv"
+alias branches="git branches"
+alias browse="git browse"
+alias c="git commit"
+alias can="git commit --amend --no-edit"
+alias cv="git commit -v"
+alias clone="git clone"
+alias cm="git commit -m"
+alias co="git checkout"
+alias del="git branch -D"
+alias diff="git diff"
+alias dt="git difftool --no-symlinks --dir-diff"
+alias fall="git fetch --all"
+alias gcon="git rebase --continue"
+alias mg="git merge"
+alias tup="git checkout trunk && git pull && git checkout -"
+alias pf="git push --force-with-lease"
+alias ph="git push -u origin HEAD"
+alias pull="git pull"
+alias push="git push"
+alias reb="git rebase -i -"
+alias rename="git branch -m"
+alias st="git status"
+alias stu="git stash -u"
+alias uncommit="git reset --soft HEAD^"
+alias unstage="git reset"
+alias gone="git fetch -p && git for-each-ref --format '%(refname:short) %(upstream:track)' | awk '$2 == \"[gone]\" {print $1}' | xargs -r git branch -D"
+
+# docker
+alias build_db="d_db_create && d_db_reset && art -on stage docker-compose run app rake db:seed"
+alias drama="art -on stage docker-compose run app"
+alias ddown="docker-compose down --remove-orphans"
+alias dstop="docker-compose stop"
+alias dbuild="docker compose build --pull"
+alias dce="docker compose exec"
+alias dup="art -on stage docker-compose up"
+alias dpry="art -on stage docker-compose run --rm --service-ports app"
+alias dprune="docker system prune --volumes -a"
+alias es_index_create="art -on stage docker-compose run app bundle exec rake index:create"
+alias es_index_refresh="art -on stage docker-compose run app bundle exec rake index:refresh"
+alias d_db_create="art -on stage docker-compose run app rake db:create"
+alias d_db_reset="art -on stage docker-compose run app rake db:reset"
+
+# art
+alias sshstage="art -on stage ssh"
+alias sshprod="art -on prod ssh"
+alias sshpeer="art -on stage ssh"
+
+# Frequent directories
+alias dot="cd $HOME/dotfiles"
+alias commonlit="cd $HOME/code/commonlit/commonlit/"
+alias quantum="cd $HOME/code/quantum"
+alias adminpanel="cd $HOME/code/quantum/adminpanel"
+alias clickmapper="cd $HOME/code/quantum/clickmapper"
+alias code="cd $HOME/code"
+alias dd="cd $HOME/code/quantum/dreamdolls"
+
+# random
+alias tl="tmux list-sessions"
+alias wifi-ip="ipconfig getifaddr en0"
+alias update="$HOME/dotfiles/bin/update_packages.sh"
+alias install_rust="curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh"
+alias intel="arch -x86_64 /bin/zsh"
+# alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
+
+killport3000="lsof -t -i tcp:3000 | xargs kill"
+
+# claude
+alias cci="claude"
+alias cc="claude --continue"

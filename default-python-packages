@@ -1,0 +1,7 @@
+autopep8
+flake8
+ipdb
+pylint
+pynvim
+yapf
+yamllint
