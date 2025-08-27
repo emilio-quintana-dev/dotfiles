@@ -1,10 +1,8 @@
 @anthropic-ai/claude-code
 @fsouza/prettierd
 @tailwindcss/language-server
-@astrojs/language-server
 bash-language-server
 diagnostic-languageserver
-dockerfile-language-server-nodejs
 eslint
 eslint-config-prettier
 eslint-plugin-jsx-a11y
@@ -22,7 +20,6 @@ npmf
 prettier
 prettier-eslint
 prettier-eslint-cli
-prettier-plugin-astro prettier
 pyright
 rustywind
 snyk

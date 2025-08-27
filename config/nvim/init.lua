@@ -168,16 +168,11 @@ require("lazy").setup({
 					"comment",
 					"css",
 					"dockerfile",
-					"eex",
-					"elixir",
-					"erlang",
 					"git_config",
 					"git_rebase",
 					"gitattributes",
 					"gitcommit",
 					"gitignore",
-					"go",
-					"heex",
 					"html",
 					"http",
 					"javascript",
@@ -192,15 +187,10 @@ require("lazy").setup({
 					"make",
 					"markdown",
 					"markdown_inline",
-					"prisma",
 					"python",
 					"regex",
 					"ruby",
-					"rust",
 					"sql",
-					"swift",
-					"svelte",
-					"terraform",
 					"todotxt",
 					"tsx",
 					"typescript",
@@ -263,28 +253,17 @@ require("lazy").setup({
 
 				mason_lspconfig.setup({
 					ensure_installed = {
-						"astro",
 						"bashls",
-						"codeqlls",
 						"cssls",
-						"dockerls",
-						"docker_compose_language_service",
 						"eslint",
 						"html",
 						"jsonls",
 						"marksman",
-						"prismals",
 						"pyright",
 						"ruby_lsp",
-						"rust_analyzer",
-						"sqlls",
 						"stylelint_lsp",
-						"svelte",
 						"lua_ls",
-						"terraformls",
-						"tflint",
 						"yamlls",
-						"elixirls",
 					},
 					automatic_installation = true,
 				})
@@ -295,12 +274,6 @@ require("lazy").setup({
 						lsp[server_name].setup({ capabilities = capabilities })
 					end,
 
-					["astro"] = function()
-						lsp.astro.setup({
-							capabilities = capabilities,
-							filetypes = { "astro" },
-						})
-					end,
 
 					["bashls"] = function()
 						lsp.bashls.setup({
@@ -309,31 +282,10 @@ require("lazy").setup({
 						})
 					end,
 
-					["codeqlls"] = function()
-						lsp.codeqlls.setup({
-							capabilities = capabilities,
-							filetypes = { "ql" },
-						})
-					end,
-
 					["cssls"] = function()
 						lsp.cssls.setup({
 							capabilities = capabilities,
 							filetypes = { "css", "scss", "less" },
-						})
-					end,
-
-					["dockerls"] = function()
-						lsp.dockerls.setup({
-							capabilities = capabilities,
-							filetypes = { "dockerfile" },
-						})
-					end,
-
-					["docker_compose_language_service"] = function()
-						lsp.docker_compose_language_service.setup({
-							capabilities = capabilities,
-							filetypes = { "yaml.docker-compose" },
 						})
 					end,
 
@@ -345,9 +297,6 @@ require("lazy").setup({
 								"javascriptreact",
 								"typescript",
 								"typescriptreact",
-								"vue",
-								"svelte",
-								"astro",
 							},
 						})
 					end,
@@ -363,13 +312,6 @@ require("lazy").setup({
 						lsp.jsonls.setup({
 							capabilities = capabilities,
 							filetypes = { "json", "jsonc" },
-						})
-					end,
-
-					["elixirls"] = function()
-						lsp.elixirls.setup({
-							capabilities = capabilities,
-							filetypes = { "elixir", "eelixir", "heex", "surface" },
 						})
 					end,
 
@@ -398,13 +340,6 @@ require("lazy").setup({
 						})
 					end,
 
-					["prismals"] = function()
-						lsp.prismals.setup({
-							capabilities = capabilities,
-							filetypes = { "prisma" },
-						})
-					end,
-
 					["pyright"] = function()
 						lsp.pyright.setup({
 							capabilities = capabilities,
@@ -419,31 +354,10 @@ require("lazy").setup({
 						})
 					end,
 
-					["rust_analyzer"] = function()
-						lsp.rust_analyzer.setup({
-							capabilities = capabilities,
-							filetypes = { "rust" },
-						})
-					end,
-
-					["sqlls"] = function()
-						lsp.sqlls.setup({
-							capabilities = capabilities,
-							filetypes = { "sql" },
-						})
-					end,
-
-					["svelte"] = function()
-						lsp.svelte.setup({
-							capabilities = capabilities,
-							filetypes = { "svelte" },
-						})
-					end,
-
 					["stylelint_lsp"] = function()
 						lsp.stylelint_lsp.setup({
 							capabilities = capabilities,
-							filetypes = { "css", "less", "scss", "sugarss", "vue", "wxss" },
+							filetypes = { "css", "less", "scss", "wxss" },
 						})
 					end,
 
@@ -451,20 +365,6 @@ require("lazy").setup({
 						lsp.ts_ls.setup({
 							capabilities = capabilities,
 							filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
-						})
-					end,
-
-					["terraformls"] = function()
-						lsp.terraformls.setup({
-							capabilities = capabilities,
-							filetypes = { "terraform", "hcl" },
-						})
-					end,
-
-					["tflint"] = function()
-						lsp.tflint.setup({
-							capabilities = capabilities,
-							filetypes = { "terraform" },
 						})
 					end,
 
@@ -574,16 +474,13 @@ require("lazy").setup({
 			formatters_by_ft = {
 				lua = { "stylua" },
 				python = { "isort", "black" },
-				astro = { "prettier" },
 				javascript = { "prettier" },
 				javascriptreact = { "prettier" },
 				typescript = { "prettier" },
 				typescriptreact = { "prettier" },
-				rust = { "rustfmt" },
 				ruby = { "rubocop" },
 				bash = { "shellharden", "shellcheck" },
 				css = { "stylelint", "prettier" },
-				elixir = { "mix format" },
 			},
 			format_on_save = { timeout_ms = 30000, lsp_fallback = true },
 		},
@@ -593,8 +490,6 @@ require("lazy").setup({
 		opts = {
 			linters_by_ft = {
 				txt = { "proselint" },
-				dockerfile = { "hadolint" },
-				elixir = { "credo" },
 				json = { "jsonlint" },
 				ruby = { "rubocop" },
 				yaml = { "yamllint" },
@@ -828,8 +723,6 @@ require("lazy").setup({
 			end,
 		},
 		-- === language plugins ===
-		{ "https://github.com/wuelnerdotexe/vim-astro", ft = "astro" },
-		{ "https://github.com/hashivim/vim-terraform", ft = "terraform" },
 		{
 			"https://github.com/iamcco/markdown-preview.nvim",
 			build = "cd app && npm install",
@@ -839,7 +732,6 @@ require("lazy").setup({
 			ft = { "markdown" },
 		},
 		{ "https://github.com/Vimjas/vim-python-pep8-indent", ft = { "python" } },
-		{ "https://github.com/rust-lang/rust.vim", ft = { "rust" } },
 		-- === other ===
 		{ "https://github.com/DanilaMihailov/beacon.nvim", event = "VeryLazy" },
 
