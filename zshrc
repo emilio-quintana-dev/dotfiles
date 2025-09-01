@@ -72,9 +72,9 @@ export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
 
 # asdf
-. $HOME/.asdf/asdf.sh
+. $(brew --prefix asdf)/libexec/asdf.sh
 [ -f "$HOME/.asdf/plugins/golang/set-env.zsh" ] && . $HOME/.asdf/plugins/golang/set-env.zsh
-fpath=(${ASDF_DIR}/completions $fpath)
+fpath=($(brew --prefix asdf)/completions $fpath)
 export NODEJS_CHECK_SIGNATURES=no
 export ASDF_GOLANG_MOD_VERSION_ENABLED=true
 export KERL_CONFIGURE_OPTIONS="--without-javac --with-ssl=$(brew --prefix openssl@1.1)"
