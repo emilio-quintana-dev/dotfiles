@@ -3,7 +3,9 @@
     "allow": [
       "Bash(brew list:*)",
       "Bash(pnpm list:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(brew bundle:*)"
     ],
     "deny": [],
     "ask": []

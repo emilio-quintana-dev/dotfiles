@@ -138,10 +138,8 @@ alias code="cd $HOME/code"
 alias dd="cd $HOME/code/quantum/dreamdolls"
 
 # random
-alias tl="tmux list-sessions"
 alias wifi-ip="ipconfig getifaddr en0"
 alias update="$HOME/dotfiles/bin/update_packages.sh"
-alias install_rust="curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh"
 alias intel="arch -x86_64 /bin/zsh"
 # alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
 
