@@ -63,8 +63,6 @@ export FZF_DEFAULT_OPTS='
   --color=dark
 '
 
-# syntax highlighting
-source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # Hub
 eval "$(hub alias -s)"
@@ -72,9 +70,6 @@ eval "$(hub alias -s)"
 # Yarn
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
-# Rust
-export PATH="$HOME/.cargo/bin:$PATH"
-[ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
 
 # asdf
 . $HOME/.asdf/asdf.sh

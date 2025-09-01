@@ -1,63 +1,98 @@
 # Dotfiles
 
-## Dependencies
+Personal configuration files for zsh, neovim, git, and development tools.
 
-[ag](https://github.com/ggreer/the_silver_searcher)
+## Prerequisites
 
-[asdf-vm](https://github.com/asdf-vm/asdf)
+- **macOS**
+- **Command line tools**: `xcode-select --install`
 
-[bat](https://github.com/sharkdp/bat)
+## Setup
 
-[chafa](https://github.com/hpjansson/chafa)
+1. **Clone this repository**
+   ```bash
+   git clone https://github.com/emilio-quintana-dev/dotfiles.git ~/dotfiles
+   cd ~/dotfiles
+   ```
 
-[delta](https://github.com/dandavison/delta)
+2. **Install Homebrew** (if not already installed)
+   ```bash
+   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+   ```
 
-[fd](https://github/sharkdp/fd)
+3. **Install all dependencies**
+   ```bash
+   brew bundle --file=Brewfile
+   ```
 
-[fzf](https://github.com/junegunn/fzf)
+4. **Set up dotfiles**
+   ```bash
+   env RCRC=$HOME/dotfiles/rcrc rcup
+   ```
 
-[hub](https://github.com/github/hub)
+## Post-Install Setup
 
-[neovim](https://neovim.io/) (The config does not support Vim only NeoVim >= 0.7)
+After running the installation:
 
-[rcm](https://github.com/thoughtbot/rcm)
+1. **Restart your shell** or run `source ~/.zshrc`
 
-[ripgrep](https://github.com/BurntSushi/ripgrep)
+2. **Set up asdf versions** (install your preferred language versions)
+   ```bash
+   # Example: Install Node.js
+   asdf plugin add nodejs
+   asdf install nodejs latest
+   asdf global nodejs latest
+   ```
 
-[rust](https://www.rust-lang.org/)
+3. **Configure Git** (update with your details)
+   ```bash
+   git config --global user.name "Your Name"
+   git config --global user.email "your.email@example.com"
+   ```
 
-[sqllite](https://www.sqlite.org/index.html) (for completion)
+4. **Install Neovim plugins** (if using Neovim)
+   - Open `nvim` and run `:PackerInstall` or similar based on your plugin manager
 
-[tpm](https://github.com/tmux-plugins/tpm)
+## What's Included
 
-[wget](https://www.gnu.org/software/wget/)
+- **Shell**: zsh configuration with custom functions and aliases
+- **Editor**: Neovim configuration 
+- **Version Control**: Git configuration with helpful aliases
+- **Development Tools**: fzf, ripgrep, fd, bat, and more for enhanced CLI experience
+- **Package Management**: asdf for managing language versions
 
-[zsh](https://www.zsh.org/)
+## Updating
 
-[zsh-completions](https://github.com/zsh-users/zsh-completions)
+You can safely run `rcup` multiple times to update symlinks when you make changes:
 
-[zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)
+```bash
+rcup
+```
 
-...and more
+## Troubleshooting
 
-(See Brewfile if on MacOS or bin/laptop if on Fedora)
+### Common Issues
 
-## Install
+**`rcup` command not found**
+- Make sure rcm is installed: `brew install rcm`
 
-Make sure you have [rcm](https://github.com/thoughtbot/rcm) installed
+**Homebrew not in PATH**
+- After installing Homebrew, add it to your PATH:
+  ```bash
+  echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+  ```
 
-Install: `env RCRC=$HOME/dotfiles/rcrc rcup`
+**asdf command not found**
+- Source your shell config: `source ~/.zshrc`
+- Or restart your terminal
 
-This will create symlinks for config files in your `$HOME` directory.
-
-You can safely run `rcup` multiple times to update.
-
-If your plugins aren't installed run `PackerInstall`, `PackerCompile`, and `PackerSync`
+**Git configuration issues**
+- Your Git config is already set up in the dotfiles, but you'll need to update the user name and email for commits
 
 ## Contributing
 
-Pull-requests are welcome, but it would probably make more sense just to fork them and make them your
-own unless your PR is for a bug fix.
+Pull-requests are welcome, but it would probably make more sense just to fork them and make them your own unless your PR is for a bug fix.
 
 ## License
 
