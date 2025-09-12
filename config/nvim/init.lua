@@ -7,7 +7,27 @@ vim.loader.enable()
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 vim.opt.termguicolors = true
-vim.opt.background = "dark"
+-- Automatically set background based on system appearance
+local function set_background()
+  local handle = io.popen("defaults read -g AppleInterfaceStyle 2>/dev/null")
+  local result = handle:read("*a")
+  handle:close()
+  
+  if result and result:match("Dark") then
+    vim.opt.background = "dark"
+  else
+    vim.opt.background = "light"
+  end
+end
+
+-- Set initial background
+set_background()
+
+-- Auto-update background when system changes (requires terminal that supports OSC 11)
+vim.api.nvim_create_autocmd("FocusGained", {
+  group = vim.api.nvim_create_augroup("auto_background", { clear = true }),
+  callback = set_background,
+})
 vim.opt.spellfile = os.getenv("HOME") .. "/.vim-spell-en.utf-8.add"
 vim.g.astro_typescript = "enable"
 vim.g.is_posix = 1    -- When the type of shell script is /bin/sh, assume a POSIX-compatible shell for syntax highlighting purposes.
@@ -95,11 +115,36 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
   -- === colorscheme(s) ===
   {
-    "https://github.com/nyoom-engineering/oxocarbon.nvim",
+    "https://github.com/ellisonleao/gruvbox.nvim",
     lazy = false,
     priority = 1000,
-    config = function()
-      vim.cmd.colorscheme("oxocarbon")
+    opts = {
+      terminal_colors = true,
+      undercurl = true,
+      underline = true,
+      bold = true,
+      italic = {
+        strings = true,
+        emphasis = true,
+        comments = true,
+        operators = false,
+        folds = true,
+      },
+      strikethrough = true,
+      invert_selection = false,
+      invert_signs = false,
+      invert_tabline = false,
+      invert_intend_guides = false,
+      inverse = true,
+      contrast = "", -- can be "hard", "soft" or empty string
+      palette_overrides = {},
+      overrides = {},
+      dim_inactive = false,
+      transparent_mode = false,
+    },
+    config = function(_, opts)
+      require("gruvbox").setup(opts)
+      vim.cmd.colorscheme("gruvbox")
     end,
   },
   -- === core ===
@@ -900,7 +945,7 @@ require("lazy").setup({
 
         require("lualine").setup({
           options = {
-            theme = theme,
+            theme = "gruvbox",
             component_separators = "",
             section_separators = { left = "", right = "" },
           },
