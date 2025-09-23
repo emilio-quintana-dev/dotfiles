@@ -1,5 +1,6 @@
 @anthropic-ai/claude-code
 @fsouza/prettierd
+corepack
 @tailwindcss/language-server
 bash-language-server
 diagnostic-languageserver

@@ -7,27 +7,8 @@ vim.loader.enable()
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 vim.opt.termguicolors = true
--- Automatically set background based on system appearance
-local function set_background()
-  local handle = io.popen("defaults read -g AppleInterfaceStyle 2>/dev/null")
-  local result = handle:read("*a")
-  handle:close()
-  
-  if result and result:match("Dark") then
-    vim.opt.background = "dark"
-  else
-    vim.opt.background = "light"
-  end
-end
-
--- Set initial background
-set_background()
-
--- Auto-update background when system changes (requires terminal that supports OSC 11)
-vim.api.nvim_create_autocmd("FocusGained", {
-  group = vim.api.nvim_create_augroup("auto_background", { clear = true }),
-  callback = set_background,
-})
+-- Always use dark background for gruvbox
+vim.opt.background = "dark"
 vim.opt.spellfile = os.getenv("HOME") .. "/.vim-spell-en.utf-8.add"
 vim.g.astro_typescript = "enable"
 vim.g.is_posix = 1    -- When the type of shell script is /bin/sh, assume a POSIX-compatible shell for syntax highlighting purposes.
@@ -582,6 +563,15 @@ require("lazy").setup({
       config = function()
         require("fzf-lua").setup({
           "fzf-native",
+          fzf_colors = true,  -- Use current colorscheme colors
+          winopts = {
+            hl = {
+              normal = "Normal",        -- Use Normal highlight group from colorscheme
+              border = "FloatBorder",    -- Use FloatBorder from colorscheme
+              preview_normal = "Normal", -- Preview window normal text
+              preview_border = "FloatBorder", -- Preview window border
+            },
+          },
           keys = {
             vim.keymap.set("n", "<C-p>", "<cmd>FzfLua files<CR>", { noremap = true, silent = true }),
             vim.keymap.set("n", "<C-b>", "<cmd>FzfLua buffers<CR>", { noremap = true, silent = true }),
@@ -864,43 +854,7 @@ require("lazy").setup({
           end,
         }
 
-        local colors = {
-          red = "#ff0167",
-          grey = "#949494",
-          black = "#1c1c1c",
-          white = "#f3f3f3",
-          green = "#22bac5",
-          orange = "#f39e8c",
-          yellow = "#ecbe7b",
-          cyan = "#334040",
-          violet = "#dc69aa",
-        }
-
-        local theme = {
-          normal = {
-            a = { fg = colors.violet, bg = colors.cyan },
-            b = { bg = colors.black },
-            c = { fg = colors.violet, bg = colors.cyan },
-            x = { fg = colors.violet, bg = colors.cyan },
-            y = { fg = colors.violet, bg = colors.cyan },
-            z = { fg = colors.violet, bg = colors.cyan },
-          },
-          insert = {
-            a = { fg = colors.cyan, bg = colors.violet },
-            b = { bg = colors.black },
-            c = { fg = colors.cyan, bg = colors.violet },
-          },
-          visual = {
-            a = { fg = colors.white, bg = colors.orange },
-            b = { bg = colors.black },
-            c = { fg = colors.white, bg = colors.orange },
-          },
-          replace = {
-            a = { fg = colors.white, bg = colors.red },
-            b = { bg = colors.black },
-            c = { fg = colors.white, bg = colors.red },
-          },
-        }
+        -- Remove hardcoded colors - use gruvbox theme colors instead
 
         local empty = require("lualine.component"):extend()
         function empty:draw(default_highlight)
@@ -915,10 +869,7 @@ require("lazy").setup({
           for name, section in pairs(sections) do
             local left = name:sub(9, 10) < "x"
             for pos = 1, name ~= "lualine_z" and #section or #section - 1 do
-              table.insert(section, pos * 2, {
-                empty,
-                color = { fg = colors.red, bg = colors.black },
-              })
+              table.insert(section, pos * 2, { empty })
             end
             for id, comp in ipairs(section) do
               if type(comp) ~= "table" then
@@ -984,9 +935,6 @@ require("lazy").setup({
                   modified = "柳",
                   removed = " ",
                 },
-                color_added = colors.green,
-                color_modified = colors.orange,
-                color_removed = colors.red,
                 condition = conditions.hide_in_width,
               },
             },
@@ -1021,15 +969,11 @@ require("lazy").setup({
                   warn = " ",
                   info = " ",
                 },
-                color_error = colors.red,
-                color_warn = colors.yellow,
-                color_info = colors.cyan,
               },
             },
             lualine_x = {
               {
                 search_result,
-                color = { fg = colors.white, bg = colors.red },
               },
             },
             lualine_y = {},
@@ -1041,7 +985,7 @@ require("lazy").setup({
                 file_status = true,
                 path = 1,
               },
-              { "filetype", color = { bg = colors.black, gui = "bold" } },
+              { "filetype", color = { gui = "bold" } },
               "%l:%c ┉ %p%% ┉ LL:%L",
             },
           }),
