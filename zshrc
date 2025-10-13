@@ -113,3 +113,10 @@ export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
 
 # Set BUNDLER_EDITOR for bundle open command
 export BUNDLER_EDITOR="nvim"
+
+# bun completions
+[ -s "/Users/emilioquintana/.bun/_bun" ] && source "/Users/emilioquintana/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"

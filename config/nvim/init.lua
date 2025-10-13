@@ -564,13 +564,11 @@ require("lazy").setup({
         require("fzf-lua").setup({
           "fzf-native",
           fzf_colors = true,  -- Use current colorscheme colors
-          winopts = {
-            hl = {
-              normal = "Normal",        -- Use Normal highlight group from colorscheme
-              border = "FloatBorder",    -- Use FloatBorder from colorscheme
-              preview_normal = "Normal", -- Preview window normal text
-              preview_border = "FloatBorder", -- Preview window border
-            },
+          hls = {
+            normal = "Normal",        -- Use Normal highlight group from colorscheme
+            border = "FloatBorder",    -- Use FloatBorder from colorscheme
+            preview_normal = "Normal", -- Preview window normal text
+            preview_border = "FloatBorder", -- Preview window border
           },
           keys = {
             vim.keymap.set("n", "<C-p>", "<cmd>FzfLua files<CR>", { noremap = true, silent = true }),

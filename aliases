@@ -68,8 +68,6 @@ alias yb="yarn build-local"
 alias yw="yarn watch"
 alias yu="curl --compressed -o- -L https://yarnpkg.com/install.sh | bash"
 
-alias rp="cd $HOME/code/work/commonlit/packages/component-library && yarn build"
-
 # Use modern regexps for sed, i.e. "(one|two)", not "\(one\|two\)"
 alias sed="sed -E"
 
@@ -130,12 +128,9 @@ alias sshpeer="art -on stage ssh"
 
 # Frequent directories
 alias dot="cd $HOME/dotfiles"
-alias commonlit="cd $HOME/code/commonlit/commonlit/"
-alias quantum="cd $HOME/code/quantum"
-alias adminpanel="cd $HOME/code/quantum/adminpanel"
-alias clickmapper="cd $HOME/code/quantum/clickmapper"
 alias code="cd $HOME/code"
-alias dd="cd $HOME/code/quantum/dreamdolls"
+alias zip="cd $HOME/code/work/chatlive/"
+alias dd="cd $HOME/code/work/quantum/dreamdolls"
 
 # random
 alias wifi-ip="ipconfig getifaddr en0"
