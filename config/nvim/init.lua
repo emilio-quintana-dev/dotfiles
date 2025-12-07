@@ -7,7 +7,6 @@ vim.loader.enable()
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 vim.opt.termguicolors = true
--- Always use dark background for gruvbox
 vim.opt.background = "dark"
 vim.opt.spellfile = os.getenv("HOME") .. "/.vim-spell-en.utf-8.add"
 vim.g.astro_typescript = "enable"
@@ -96,36 +95,12 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
   -- === colorscheme(s) ===
   {
-    "https://github.com/ellisonleao/gruvbox.nvim",
+    "https://github.com/projekt0n/github-nvim-theme",
     lazy = false,
     priority = 1000,
-    opts = {
-      terminal_colors = true,
-      undercurl = true,
-      underline = true,
-      bold = true,
-      italic = {
-        strings = true,
-        emphasis = true,
-        comments = true,
-        operators = false,
-        folds = true,
-      },
-      strikethrough = true,
-      invert_selection = false,
-      invert_signs = false,
-      invert_tabline = false,
-      invert_intend_guides = false,
-      inverse = true,
-      contrast = "", -- can be "hard", "soft" or empty string
-      palette_overrides = {},
-      overrides = {},
-      dim_inactive = false,
-      transparent_mode = false,
-    },
-    config = function(_, opts)
-      require("gruvbox").setup(opts)
-      vim.cmd.colorscheme("gruvbox")
+    config = function()
+      require("github-theme").setup({})
+      vim.cmd.colorscheme("github_dark_default")
     end,
   },
   -- === core ===
@@ -778,14 +753,6 @@ require("lazy").setup({
       submodules = false,
       config = true,
     },
-    {
-      "https://github.com/laytan/cloak.nvim",
-      event = { "BufReadPre" },
-      ft = { "sh" },
-      config = function()
-        require("cloak").setup()
-      end,
-    },
     { "https://github.com/stefandtw/quickfix-reflector.vim", event = "VeryLazy" },
     {
       "https://github.com/norcalli/nvim-colorizer.lua",
@@ -894,7 +861,7 @@ require("lazy").setup({
 
         require("lualine").setup({
           options = {
-            theme = "gruvbox",
+            theme = "auto",
             component_separators = "",
             section_separators = { left = "", right = "" },
           },

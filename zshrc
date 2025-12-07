@@ -77,7 +77,7 @@ export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 fpath=($(brew --prefix asdf)/completions $fpath)
 export NODEJS_CHECK_SIGNATURES=no
 export ASDF_GOLANG_MOD_VERSION_ENABLED=true
-export KERL_CONFIGURE_OPTIONS="--without-javac --with-ssl=$(brew --prefix openssl@1.1)"
+export KERL_CONFIGURE_OPTIONS="--without-javac --with-ssl=$(brew --prefix openssl@3)"
 
 
 # docker
@@ -120,3 +120,5 @@ export BUNDLER_EDITOR="nvim"
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+
+export RUBYOPT="-r$HOME/.rubyopenssl_default_store.rb $RUBYOPT"

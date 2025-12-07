@@ -5,7 +5,8 @@
       "Bash(pnpm list:*)",
       "Bash(git add:*)",
       "Bash(git commit:*)",
-      "Bash(brew bundle:*)"
+      "Bash(brew bundle:*)",
+      "Bash(git config:*)"
     ],
     "deny": [],
     "ask": []
