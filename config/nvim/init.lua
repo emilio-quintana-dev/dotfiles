@@ -258,11 +258,9 @@ require("lazy").setup({
             "jsonls",
             "marksman",
             "pyright",
-            "ruby_lsp",
             "stylelint_lsp",
             "lua_ls",
             "yamlls",
-            "rubocop",
           },
           automatic_installation = true,
         })
@@ -350,6 +348,14 @@ require("lazy").setup({
             lsp.ruby_lsp.setup({
               capabilities = capabilities,
               filetypes = { "ruby" },
+              cmd = { "bundle", "exec", "ruby-lsp" },
+            })
+          end,
+
+          ["rubocop"] = function()
+            lsp.rubocop.setup({
+              capabilities = capabilities,
+              cmd = { "bundle", "exec", "rubocop", "--lsp" },
             })
           end,
 
@@ -481,19 +487,38 @@ require("lazy").setup({
         bash = { "shellharden", "shellcheck" },
         css = { "stylelint", "prettier" },
       },
+      formatters = {
+        rubocop = {
+          command = "bundle",
+          args = { "exec", "rubocop", "--autocorrect", "--format", "quiet", "--stderr", "--stdin", "$FILENAME" },
+        },
+      },
       format_on_save = { timeout_ms = 30000, lsp_fallback = true },
     },
   },
   {
     "https://github.com/mfussenegger/nvim-lint",
-    opts = {
-      linters_by_ft = {
+    config = function()
+      local lint = require("lint")
+      lint.linters_by_ft = {
         txt = { "proselint" },
         json = { "jsonlint" },
         ruby = { "rubocop" },
         yaml = { "yamllint" },
-      },
-    },
+      }
+      lint.linters.rubocop.cmd = "bundle"
+      lint.linters.rubocop.args = {
+        "exec",
+        "rubocop",
+        "--format",
+        "json",
+        "--force-exclusion",
+        "--stdin",
+        function()
+          return vim.api.nvim_buf_get_name(0)
+        end,
+      }
+    end,
     {
       "https://github.com/zbirenbaum/copilot.lua",
       cmd = "Copilot",
@@ -538,11 +563,11 @@ require("lazy").setup({
       config = function()
         require("fzf-lua").setup({
           "fzf-native",
-          fzf_colors = true,  -- Use current colorscheme colors
+          fzf_colors = true,                -- Use current colorscheme colors
           hls = {
-            normal = "Normal",        -- Use Normal highlight group from colorscheme
-            border = "FloatBorder",    -- Use FloatBorder from colorscheme
-            preview_normal = "Normal", -- Preview window normal text
+            normal = "Normal",              -- Use Normal highlight group from colorscheme
+            border = "FloatBorder",         -- Use FloatBorder from colorscheme
+            preview_normal = "Normal",      -- Preview window normal text
             preview_border = "FloatBorder", -- Preview window border
           },
           keys = {
